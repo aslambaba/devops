@@ -1,0 +1,34 @@
+---
+- hosts: webServer
+  become: yes
+  vars:
+    Repo_Name: MyShoes
+    GitHub_Url: https://github.com/aslambaba/
+  tasks:
+    - name: Install Git and Curl
+      apt:
+        name:
+          - git
+          - curl
+        state: present
+    - name: Download Nodejs File And Nginx
+      shell: "curl -sL https://deb.nodesource.com/setup_16.x | sudo bash - && apt -y install nodejs && npm install -g npm@8.19.1 && apt install nginx -y"
+    - name: Install PM2
+      shell: "npm install pm2@latest -g"
+    - name: Clone MyShoes into WorkerNodes
+      shell: "cd ~/ && rm -rf {{Repo_Name}} && git clone {{GitHub_Url}}{{Repo_Name}}"
+    - name: Copy Clone File into Nginx Conf
+      copy:
+        src: ~/MyShoes/
+        dest: /var/www/html/
+        remote_src: yes
+    - name: Install Project Dep
+      shell: "cd /var/www/html && sudo npm install"
+    - name: Copy NginxConf File
+      copy:
+        src: /home/ubuntu/Projects/02_useTerraform_nginxLoadBalancer_andSetup_docker_instance/nginx.conf
+        dest: /etc/nginx/
+    - name: Restart Nginx
+      shell: "systemctl restart nginx"
+    - name: RUN APPLICATION
+      shell: "cd /var/www/html && pm2 start --name {{Repo_Name}} npm -- start"

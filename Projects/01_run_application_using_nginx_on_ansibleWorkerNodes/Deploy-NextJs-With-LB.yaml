@@ -1,0 +1,40 @@
+---
+- hosts: webServer
+  become: yes
+  vars: 
+    Repo_Name: MyShoes
+    GitHub_URL: https://github.com/aslambaba/
+  tasks:
+    - name: Intsall Curl
+      apt:
+       name:
+        - curl
+        - git
+       state: present
+    - name: Download Nodejs File
+      ansible.builtin.shell:
+        cmd: curl -sL https://deb.nodesource.com/setup_16.x | sudo bash - && apt -y install nodejs && npm install -g npm@8.19.1
+    - name: Clone MyShoes into WorkerNodes
+      ansible.builtin.shell:
+        cmd: git clone {{GitHub_URL}}{{Repo_Name}}
+        chdir: ~/
+    - name: Copy Clone File into Nginx Conf
+      copy:
+        src: ~/MyShoes/
+        dest: /var/www/html/
+        remote_src: yes
+    - name: Install Project Dep
+      ansible.builtin.shell:
+        cmd: sudo npm install
+        chdir: /var/www/html/
+    - name: Copy NginxConf File
+      copy:
+        src: ~/Ansible_ControlPanel/nginx.conf
+        dest: /etc/nginx/
+    - name: Restart Nginx
+      ansible.builtin.shell:  
+        cmd: sudo systemctl restart nginx
+    - name: RUN APPLICATION
+      ansible.builtin.shell:
+        cmd: sudo npm start
+        chdir: /var/www/html/

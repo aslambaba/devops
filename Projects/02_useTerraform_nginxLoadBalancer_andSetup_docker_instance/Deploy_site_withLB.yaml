@@ -1,4 +1,18 @@
 ---
+- hosts: NGLoadBalancer
+  become: yes
+  tasks:
+    - name: Install Nginx
+      apt: 
+       - nginx
+    - name: Copy Nginx File to LB
+      copy:  
+        src:  /home/ubuntu/devops/Projects/02_useTerraform_nginxLoadBalancer_andSetup_docker_instance/nginx_LB.conf
+        dest: /etc/nginx/
+    - name: Rename File
+      shell: "mv /etc/nginx/nginx_LB.conf /etc/nginx/nginx.conf"
+    - name: Restart Nginx
+      shell: "systemctl restart nginx"
 - hosts: webServer
   become: yes
   vars:
@@ -32,3 +46,12 @@
       shell: "systemctl restart nginx"
     - name: RUN APPLICATION
       shell: "cd /var/www/html && pm2 start --name {{Repo_Name}} npm -- start"
+- hosts: dockerServer
+  become: yes
+  tasks:
+    - name: Clone Repo
+      shell: "cd ~/ && rm -rf {{Repo_Name}} && git clone {{GitHub_Url}}{{Repo_Name}}"
+    - name: Build DockerImage
+      shell: "docker build -t aslambaba/myshoe /home/ubuntu/{{Repo_Name}}/."
+    - name: Run Container
+      shell: "docker run -p 1080:80 -dit aslambaba/myshoe"

@@ -1,0 +1,8 @@
+---
+- hosts: NGLoadBalancer
+  become: yes
+  tasks:
+    - name: Copy Nginx File to LB
+      shell: "mv /home/ubuntu/devops/Projects/02_useTerraform_nginxLoadBalancer_andSetup_docker_instance/nginx_LB.conf /etc/nginx/nginx.conf"
+    - name: Restart Nginx
+      shell: "systemctl restart nginx"

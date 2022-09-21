@@ -236,8 +236,6 @@ resource "aws_instance" "Nginx_LoadBalancer" {
 
     apt update
     apt install nginx,git
-    cd /home/ubuntu && git clone https://github.com/aslambaba/devops.git
-    mv /home/ubuntu/devops/Projects/02_useTerraform_nginxLoadBalancer_andSetup_docker_instance/nginx_LB.conf /etc/nginx/nginx.conf
     systemctl start nginx
     EOL   
 }

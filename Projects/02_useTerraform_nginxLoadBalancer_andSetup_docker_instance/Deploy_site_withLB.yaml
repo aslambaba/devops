@@ -4,7 +4,8 @@
   tasks:
     - name: Install Nginx
       apt: 
-       - nginx
+        name:
+          - nginx
     - name: Copy Nginx File to LB
       copy:  
         src:  /home/ubuntu/devops/Projects/02_useTerraform_nginxLoadBalancer_andSetup_docker_instance/nginx_LB.conf
@@ -48,6 +49,9 @@
       shell: "cd /var/www/html && pm2 start --name {{Repo_Name}} npm -- start"
 - hosts: dockerServer
   become: yes
+  vars:
+    Repo_Name: MyShoes
+    GitHub_Url: https://github.com/aslambaba/
   tasks:
     - name: Clone Repo
       shell: "cd ~/ && rm -rf {{Repo_Name}} && git clone {{GitHub_Url}}{{Repo_Name}}"

@@ -235,7 +235,7 @@ resource "aws_instance" "Nginx_LoadBalancer" {
     #!/bin/bash -xe
 
     apt update
-    apt install nginx,git
+    apt install -y nginx,git
     systemctl start nginx
     EOL   
 }

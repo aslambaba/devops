@@ -3,6 +3,10 @@
   become: yes
   tasks:
     - name: Copy Nginx File to LB
-      shell: "mv /home/ubuntu/devops/Projects/02_useTerraform_nginxLoadBalancer_andSetup_docker_instance/nginx_LB.conf /etc/nginx/nginx.conf"
+      copy:  
+        src:  /home/ubuntu/devops/Projects/02_useTerraform_nginxLoadBalancer_andSetup_docker_instance/nginx_LB.conf
+        dest: /etc/nginx/
+    - name: Rename File
+      shell: "mv /etc/nginx/nginx_LB.conf /etc/nginx/nginx.conf"
     - name: Restart Nginx
       shell: "systemctl restart nginx"

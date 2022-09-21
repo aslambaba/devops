@@ -26,7 +26,7 @@
       shell: "cd /var/www/html && sudo npm install"
     - name: Copy NginxConf File
       copy:
-        src: /home/ubuntu/Projects/02_useTerraform_nginxLoadBalancer_andSetup_docker_instance/nginx.conf
+        src: /home/ubuntu/devops/Projects/02_useTerraform_nginxLoadBalancer_andSetup_docker_instance/nginx.conf
         dest: /etc/nginx/
     - name: Restart Nginx
       shell: "systemctl restart nginx"

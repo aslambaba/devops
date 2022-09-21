@@ -2,6 +2,9 @@
 - hosts: NGLoadBalancer
   become: yes
   tasks:
+    - name: Install Nginx
+      apt: 
+       - nginx
     - name: Copy Nginx File to LB
       copy:  
         src:  /home/ubuntu/devops/Projects/02_useTerraform_nginxLoadBalancer_andSetup_docker_instance/nginx_LB.conf

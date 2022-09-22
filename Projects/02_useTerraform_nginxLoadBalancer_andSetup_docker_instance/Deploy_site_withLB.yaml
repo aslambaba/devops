@@ -53,6 +53,8 @@
     Repo_Name: MyShoes
     GitHub_Url: https://github.com/aslambaba/
   tasks:
+    - name: Install Docker
+      shell: "apt install docker.io -y"
     - name: Clone Repo
       shell: "cd ~/ && rm -rf {{Repo_Name}} && git clone {{GitHub_Url}}{{Repo_Name}}"
     - name: Build DockerImage

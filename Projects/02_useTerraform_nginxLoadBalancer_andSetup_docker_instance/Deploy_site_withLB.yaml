@@ -60,4 +60,4 @@
     - name: Build DockerImage
       shell: "docker build -t aslambaba/myshoe /home/ubuntu/{{Repo_Name}}/."
     - name: Run Container
-      shell: "docker run -p 1080:80 -dit aslambaba/myshoe"
+      shell: "sudo docker run -it -p 80:3000 aslambaba/myshoe"

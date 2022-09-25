@@ -50,7 +50,7 @@
 - hosts: dockerServer
   become: yes
   vars:
-    Repo_Name: MyShoes
+    Repo_Name: Myshoes
     GitHub_Url: https://github.com/aslambaba/
   tasks:
     - name: Install Docker

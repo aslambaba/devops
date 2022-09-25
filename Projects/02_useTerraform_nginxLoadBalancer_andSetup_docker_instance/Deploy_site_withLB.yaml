@@ -58,6 +58,6 @@
     - name: Clone Repo
       shell: "cd ~/ && rm -rf {{Repo_Name}} && git clone {{GitHub_Url}}{{Repo_Name}}"
     - name: Build DockerImage
-      shell: "docker build -t aslambaba/myshoe /home/ubuntu/{{Repo_Name}}/."
+      shell: "docker build -t aslambaba/myshoe /home/node/{{Repo_Name}}/."
     - name: Run Container
       shell: "sudo docker run -it -p 80:3000 aslambaba/myshoe"

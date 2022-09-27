@@ -55,8 +55,10 @@
   tasks:
     - name: Install Docker
       shell: "apt install docker.io -y"
-    - name: Clone Repo
-      shell: "cd ~/ && rm -rf {{Repo_Name}} && git clone {{GitHub_Url}}{{Repo_Name}}"
+    - name: Remove Old Repo
+      shell: "cd ~/ && rm -rf {{Repo_Name}}"
+    - name: Clone new Image
+      shell: git clone {{GitHub_Url}}{{Repo_Name}}
     - name: Build DockerImage
       shell: "docker build -t aslambaba/camile /home/ubuntu/{{Repo_Name}}/."
     - name: Run Container

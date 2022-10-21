@@ -60,6 +60,6 @@
     - name: Clone new Image
       shell: git clone {{GitHub_Url}}{{Repo_Name}}
     - name: Build DockerImage
-      shell: "docker build -t aslambaba/camile /root/{{Repo_Name}}/."
+      shell: "docker build -t aslambaba/camile /home/ubuntu/{{Repo_Name}}/."
     - name: Run Container
       shell: "sudo docker run -it -p 80:80 aslambaba/camile"

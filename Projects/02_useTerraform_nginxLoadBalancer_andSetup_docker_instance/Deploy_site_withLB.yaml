@@ -58,7 +58,7 @@
     - name: Remove Old Repo
       shell: "cd /home/ubuntu/ && rm -rf {{Repo_Name}}"
     - name: Stop & Remove Old Container
-      shell: "docker stop $(docker ps -a -q) && docker container prune"
+      shell: "docker stop $(docker ps -a -q)"
     - name: Clone new Image
       shell: git clone {{GitHub_Url}}{{Repo_Name}}
     - name: Build DockerImage

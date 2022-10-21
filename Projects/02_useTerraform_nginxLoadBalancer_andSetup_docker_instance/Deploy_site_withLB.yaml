@@ -56,7 +56,7 @@
     - name: Install Docker
       shell: "apt install docker.io -y"
     - name: Remove Old Repo
-      shell: "cd ~/ && rm -rf {{Repo_Name}}"
+      shell: "cd /home/ubuntu/ && rm -rf {{Repo_Name}}"
     - name: Clone new Image
       shell: git clone {{GitHub_Url}}{{Repo_Name}}
     - name: Build DockerImage

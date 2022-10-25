@@ -57,11 +57,11 @@
       shell: "apt install docker.io -y"
     - name: Remove Old Repo
       shell: "cd /home/ubuntu/ && rm -rf {{Repo_Name}}"
-    - name: Stop Old Container
-      shell: "docker stop $(docker ps -a -q)"
+    - name: Stop & Remove old Container
+      shell: "docker stop $(docker ps -a -q) && docker rm -f aslam_camile_proj"
     - name: Clone new Image
       shell: git clone {{GitHub_Url}}{{Repo_Name}}
     - name: Build DockerImage
       shell: "docker build -t aslambaba/camile /home/ubuntu/{{Repo_Name}}/."
     - name: Run Container
-      shell: "sudo docker run -it -p 80:80 aslambaba/camile"
+      shell: "sudo docker run --name aslam_camile_proj -it -p 80:80 aslambaba/camile && sudo docker exec aslam_camile_proj /etc/init.d/nginx restart "

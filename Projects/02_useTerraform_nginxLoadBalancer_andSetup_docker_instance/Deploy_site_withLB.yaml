@@ -64,4 +64,4 @@
     - name: Build DockerImage
       shell: "docker build -t aslambaba/camile /home/ubuntu/{{Repo_Name}}/."
     - name: Run Container
-      shell: "sudo docker run --name aslam_camile_proj -it -p 80:80 aslambaba/camile && sudo docker exec aslam_camile_proj /etc/init.d/nginx restart "
+      shell: "sudo docker run --name aslam_camile_proj -it -p 80:80 aslambaba/camile && sudo docker exec aslam_camile_proj /etc/init.d/nginx restart"

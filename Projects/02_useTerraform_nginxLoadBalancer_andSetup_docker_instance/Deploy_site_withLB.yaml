@@ -65,6 +65,4 @@
     - name: Buildd DockerImage
       shell: "docker build -t aslambaba/camile /home/ubuntu/{{Repo_Name}}/."
     - name: Run Container
-      vars:
-        timestamp: ansible_date_time.epoch
-      shell: "sudo docker run --name aslam_camile_proj_{{timestamp}} -it -p 80:80 aslambaba/camile && sudo docker exec aslam_camile_proj /etc/init.d/nginx restart"
+      shell: "sudo docker run --name aslam_camile_proj -it -p 80:80 aslambaba/camile && sudo docker exec aslam_camile_proj /etc/init.d/nginx restart"

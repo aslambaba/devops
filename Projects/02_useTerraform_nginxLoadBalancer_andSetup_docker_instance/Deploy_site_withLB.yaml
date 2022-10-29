@@ -58,7 +58,7 @@
       shell: "apt install docker.io -y"
     - name: Remove Old Repo
       shell: "cd /home/ubuntu/ && rm -rf {{Repo_Name}}"
-    - name: Get running containers details
+    - name: Get running containers details2
       docker_host_info:
         containers: yes
       register: docker_info

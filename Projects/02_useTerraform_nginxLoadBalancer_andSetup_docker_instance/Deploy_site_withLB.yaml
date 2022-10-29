@@ -58,6 +58,10 @@
       shell: "apt install docker.io -y"
     - name: Remove Old Repo
       shell: "cd /home/ubuntu/ && rm -rf {{Repo_Name}}"
+    - name: Get running containers
+      docker_host_info:
+        containers: yes
+      register: docker_info
     - name: Stop & Remove Old Container
       docker_container:
         name: "{{ item }}"
@@ -69,5 +73,5 @@
       shell: "docker build -t aslambaba/camile /home/ubuntu/{{Repo_Name}}/."
     - name: Run Container
       vars:
-        TimeStamp: ansible_date_time.epoch
-      shell: "sudo docker run --name aslam_camile_proj_{{TimeStamp}} -it -p 80:80 aslambaba/camile && sudo docker exec aslam_camile_proj /etc/init.d/nginx restart"
+        TimeStamp: "{{ansible_date_time.epoch}}"
+      shell: "sudo docker run --name aslam_camile_proj_{{TimeStamp}} -idt -p 80:80 aslambaba/camile && sudo docker exec aslam_camile_proj_{{TimeStamp}} /etc/init.d/nginx restart"

@@ -34,7 +34,7 @@
       shell: "cd ~/ && rm -rf {{Repo_Name}} && git clone {{GitHub_Url}}{{Repo_Name}}"
     - name: Copy Clone File into Nginx Conf
       copy:
-        src: ~/MyShoes/
+        src: ~/{{Repo_Name}}/
         dest: /var/www/html/
         remote_src: yes
     - name: Install Project Dep

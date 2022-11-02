@@ -3,12 +3,12 @@
   become: yes
   tasks:
     - name: Install Nginx
-      apt: 
+      apt:
         name:
           - nginx
     - name: Copy Nginx File to LB
-      copy:  
-        src:  /home/ubuntu/devops/Projects/02_useTerraform_nginxLoadBalancer_andSetup_docker_instance/nginx_LB.conf
+      copy:
+        src: /home/ubuntu/devops/Projects/02_useTerraform_nginxLoadBalancer_andSetup_docker_instance/nginx_LB.conf
         dest: /etc/nginx/
     - name: Rename File
       shell: "mv /etc/nginx/nginx_LB.conf /etc/nginx/nginx.conf"

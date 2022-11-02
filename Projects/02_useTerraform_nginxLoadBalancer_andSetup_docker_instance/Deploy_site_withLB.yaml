@@ -17,7 +17,7 @@
 - hosts: webServer
   become: yes
   vars:
-    Repo_Name: My-Movie-Theater
+    Repo_Name: MyShoes
     GitHub_Url: https://github.com/aslambaba/
   tasks:
     - name: Install Git and Curl

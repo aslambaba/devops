@@ -28,8 +28,6 @@
         state: present
     - name: Download Nodejs File And Nginx
       shell: "curl -sL https://deb.nodesource.com/setup_16.x | sudo bash - && apt -y install nodejs && npm install -g npm@8.19.1 && apt install nginx -y"
-    - name: Install PM2
-      shell: "npm install pm2@latest -g"
     - name: Clone MyShoes into WorkerNodes
       shell: "cd ~/ && rm -rf {{Repo_Name}} && git clone {{GitHub_Url}}{{Repo_Name}}"
     - name: Copy Clone File into Nginx Conf
@@ -45,8 +43,8 @@
         dest: /etc/nginx/
     - name: Restart Nginx
       shell: "systemctl restart nginx"
-    - name: RUN APPLICATION
-      shell: "cd /var/www/html && pm2 start --name {{Repo_Name}} npm -- start"
+    - name: BUILD APPLICATION
+      shell: "cd /var/www/html && sudo npm run build"
 - hosts: dockerServer
   become: yes
   gather_facts: true

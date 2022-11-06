@@ -30,9 +30,11 @@
       shell: "curl -sL https://deb.nodesource.com/setup_16.x | sudo bash - && apt -y install nodejs && npm install -g npm@8.19.1 && apt install nginx -y"
     - name: Clone MyShoes into WorkerNodes
       shell: "cd ~/ && rm -rf {{Repo_Name}} && git clone {{GitHub_Url}}{{Repo_Name}}"
+    - name: BUILD APPLICATION
+      shell: "cd ~/{{Repo_Name}} && sudo npm run build"
     - name: Copy Clone File into Nginx Conf
       copy:
-        src: ~/{{Repo_Name}}/
+        src: ~/{{Repo_Name}}/build/
         dest: /var/www/html/
         remote_src: yes
     - name: Install Project Dep
@@ -43,8 +45,6 @@
         dest: /etc/nginx/
     - name: Restart Nginx
       shell: "systemctl restart nginx"
-    - name: BUILD APPLICATION
-      shell: "cd /var/www/html && sudo npm run build"
 - hosts: dockerServer
   become: yes
   gather_facts: true

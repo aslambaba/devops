@@ -31,7 +31,7 @@
     - name: Clone MyShoes into WorkerNodes
       shell: "cd ~/ && rm -rf {{Repo_Name}} && git clone {{GitHub_Url}}{{Repo_Name}}"
     - name: BUILD APPLICATION
-      shell: "cd ~/{{Repo_Name}} && sudo npm run build"
+      shell: "cd ~/{{Repo_Name}}/ && sudo npm run build"
     - name: Copy Clone File into Nginx Conf
       copy:
         src: ~/{{Repo_Name}}/build/

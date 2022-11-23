@@ -27,7 +27,7 @@
           - curl
         state: present
     - name: Download Nodejs File And Nginx
-      shell: "curl -sL https://deb.nodesource.com/setup_16.x | sudo bash - && apt -y install nodejs && npm install -g npm@lastest && apt install nginx -y"
+      shell: "curl -sL https://deb.nodesource.com/setup_16.x | sudo bash - && apt -y install nodejs && npm install -g npm && apt install nginx -y"
     - name: Clone MyShoes into WorkerNodes
       shell: "cd ~/ && rm -rf {{Repo_Name}} && git clone {{GitHub_Url}}{{Repo_Name}}"
     - name: Copy Clone File into Nginx Conf

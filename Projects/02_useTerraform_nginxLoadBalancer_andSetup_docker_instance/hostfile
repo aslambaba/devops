@@ -1,5 +1,5 @@
-workerNode1 ansible_host=172.31.9.135 ansible_user=ubuntu ansible_ssh_private_key_file=key.pem
-workerNode2 ansible_host=172.31.11.7 ansible_user=ubuntu ansible_ssh_private_key_file=key.pem
+workerNode1 ansible_host=172.31.13.198 ansible_user=ubuntu ansible_ssh_private_key_file=key.pem
+workerNode2 ansible_host=172.31.15.49 ansible_user=ubuntu ansible_ssh_private_key_file=key.pem
 workerNode3 ansible_host=172.31.43.58 ansible_user=ubuntu ansible_ssh_private_key_file=key.pem
 workerNode4 ansible_host=172.31.39.97 ansible_user=ubuntu ansible_ssh_private_key_file=key.pem
 

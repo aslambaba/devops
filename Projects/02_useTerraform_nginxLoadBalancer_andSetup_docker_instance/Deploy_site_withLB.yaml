@@ -27,7 +27,7 @@
           - curl
         state: present
     - name: Download Nodejs File
-      shell: "curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash - && sudo apt-get install nodejs -y"
+      shell: "curl -s https://deb.nodesource.com/setup_16.x | sudo bash && sudo apt-get install nodejs -y"
     - name: Download Nginx
       shell: "sudo apt-get install nginx -y"
     - name: Clone MyShoes into WorkerNodes

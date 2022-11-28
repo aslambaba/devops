@@ -32,6 +32,8 @@
       shell: "sudo apt-get install nginx -y"
     - name: Clone MyShoes into WorkerNodes
       shell: "cd ~/ && rm -rf {{Repo_Name}} && git clone {{GitHub_Url}}{{Repo_Name}}"
+    - name: Remove  File from Nginx WebServer
+      shell: "rm -r /var/www/html/*"
     - name: Copy Clone File into Nginx Conf
       copy:
         src: ~/{{Repo_Name}}/

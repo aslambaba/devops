@@ -32,7 +32,7 @@
       shell: "sudo apt-get install nginx -y"
     - name: Clone MyShoes into WorkerNodes
       shell: "cd ~/ && rm -rf {{Repo_Name}} && git clone {{GitHub_Url}}{{Repo_Name}}"
-    - name: Remove  File from Nginx WebServer
+    - name: Remove File from Nginx WebServer
       shell: "rm -r /var/www/html/*"
     - name: Copy Clone File into Nginx Conf
       copy:
@@ -40,7 +40,7 @@
         dest: /var/www/html/
         remote_src: yes
     - name: Install Project Dep
-      shell: "cd /var/www/html && sudo npm install"
+      shell: "cd /var/www/html/ && sudo npm install"
     - name: Copy NginxConf File
       copy:
         src: /home/ubuntu/devops/Projects/02_useTerraform_nginxLoadBalancer_andSetup_docker_instance/nginx.conf

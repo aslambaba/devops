@@ -36,7 +36,7 @@
       shell: "rm -r /var/www/html/*"
     - name: Copy Build File into Nginx Server
       copy:
-        src: ~/{{Repo_Name}}/build/
+        src: /home/ubuntu/{{Repo_Name}}/build/
         dest: /var/www/html/
         remote_src: yes
     # - name: Install Project Dep

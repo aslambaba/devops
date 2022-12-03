@@ -30,25 +30,23 @@
       shell: "curl -s https://deb.nodesource.com/setup_16.x | sudo bash && sudo apt-get install nodejs -y"
     - name: Download Nginx
       shell: "sudo apt-get install nginx -y"
-    - name: Clone MyShoes into WorkerNodes
-      shell: "cd ~/ && rm -rf {{Repo_Name}} && git clone {{GitHub_Url}}{{Repo_Name}}"
+    # - name: Clone MyShoes into WorkerNodes
+    #   shell: "cd ~/ && rm -rf {{Repo_Name}} && git clone {{GitHub_Url}}{{Repo_Name}}"
     - name: Remove File from Nginx WebServer
       shell: "rm -r /var/www/html/*"
-    - name: Copy Clone File into Nginx Conf
+    - name: Copy Build File into Nginx Server
       copy:
-        src: ~/{{Repo_Name}}/
+        src: ~/{{Repo_Name}}/build/
         dest: /var/www/html/
         remote_src: yes
-    - name: Install Project Dep
-      shell: "cd /var/www/html/ && sudo npm install"
+    # - name: Install Project Dep
+    #   shell: "cd /var/www/html/ && sudo npm install"
     - name: Copy NginxConf File
       copy:
         src: /home/ubuntu/devops/Projects/02_useTerraform_nginxLoadBalancer_andSetup_docker_instance/nginx.conf
         dest: /etc/nginx/
     - name: Restart Nginx
       shell: "systemctl restart nginx"
-    - name: BUILD APPLICATION
-      shell: "cd /var/www/html && sudo npm run build"
 - hosts: dockerServer
   become: yes
   gather_facts: true

@@ -34,10 +34,10 @@
     - name: Clone MyShoes Built-Files Branch into WorkerNodes
       shell: "cd ~/ && rm -rf {{Repo_Name}} && git clone --branch={{Branch_Name}} {{GitHub_Url}}{{Repo_Name}}"
     - name: Remove File from Nginx WebServer
-      shell: "rm -r /var/www/html/*"
+        shell: "rm -r /var/www/html/*"
     - name: Copy Build File into Nginx Server
       copy:
-        src: /home/ubuntu/{{Repo_Name}}/build/
+        src: ~/{{Repo_Name}}/build/
         dest: /var/www/html/
         remote_src: yes
     - name: Copy NginxConf File

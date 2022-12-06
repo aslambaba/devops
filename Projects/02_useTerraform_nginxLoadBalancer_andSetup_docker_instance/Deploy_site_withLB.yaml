@@ -19,6 +19,7 @@
   vars:
     Repo_Name: MyShoes
     GitHub_Url: https://github.com/aslambaba/
+    Branch_Name: build-files
   tasks:
     - name: Install Git and Curl
       apt:
@@ -30,8 +31,8 @@
       shell: "curl -s https://deb.nodesource.com/setup_16.x | sudo bash && sudo apt-get install nodejs -y"
     - name: Download Nginx
       shell: "sudo apt-get install nginx -y"
-    # - name: Clone MyShoes into WorkerNodes
-    #   shell: "cd ~/ && rm -rf {{Repo_Name}} && git clone {{GitHub_Url}}{{Repo_Name}}"
+    - name: Clone MyShoes Built-Files Branch into WorkerNodes
+      shell: "cd ~/ && rm -rf {{Repo_Name}} && git clone --branch={{Branch_Name}} {{GitHub_Url}}{{Repo_Name}}"
     - name: Remove File from Nginx WebServer
       shell: "rm -r /var/www/html/*"
     - name: Copy Build File into Nginx Server
@@ -39,8 +40,6 @@
         src: /home/ubuntu/{{Repo_Name}}/build/
         dest: /var/www/html/
         remote_src: yes
-    # - name: Install Project Dep
-    #   shell: "cd /var/www/html/ && sudo npm install"
     - name: Copy NginxConf File
       copy:
         src: /home/ubuntu/devops/Projects/02_useTerraform_nginxLoadBalancer_andSetup_docker_instance/nginx.conf

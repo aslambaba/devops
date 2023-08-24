@@ -1,0 +1,22 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: developerswags-deployment
+  namespace: web
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      env: testing
+  template:
+    metadata:
+      name: developerswag-deployment-pods
+      labels:
+        env: testing
+    spec:
+      containers:
+      - name: developerswag-container
+        image: aslambaba/developerswags:latest
+        ports:
+        - containerPort: 3000
+  

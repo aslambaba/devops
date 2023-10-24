@@ -5,7 +5,6 @@
 
 .DS_Store
 # Common VCS dirs
-secrets/
 .git/
 .gitignore
 .bzr/

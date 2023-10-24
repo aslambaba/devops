@@ -1,0 +1,12 @@
+# Default values for campushub-charts.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+
+frontend:
+  image: aslambaba/campushub-frontend
+  version: v1
+
+backend:
+  image: aslambaba/campushub-backend
+  version: v1

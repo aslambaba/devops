@@ -1,0 +1,52 @@
+# backend-deployment-service.yaml
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: campushub-backend
+  template:
+    metadata:
+      labels:
+        app: campushub-backend
+    spec:
+      containers:
+        - name: backend
+          image: '{{ .Values.backend.image }}:{{ .Values.backend.version }}'
+          env:
+          - name: BackendPORT
+            valueFrom:
+              secretKeyRef:
+                name: my-mongodb-atlas-secret
+                key: BackendPORT
+          - name: mongodbUser
+            valueFrom:
+              secretKeyRef:
+                name: my-mongodb-atlas-secret
+                key: mongodbUser
+          - name: mongodbPass
+            valueFrom:
+              secretKeyRef:
+                name: my-mongodb-atlas-secret
+                key: mongodbPass
+          ports:
+            - containerPort: 8000
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service
+spec:
+  selector:
+    app: campushub-backend
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000
+  type: LoadBalancer
